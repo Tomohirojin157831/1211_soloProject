@@ -130,22 +130,7 @@
                             <constraint firstItem="znt-im-etu" firstAttribute="leading" secondItem="4F5-Lx-1Zn" secondAttribute="leading" constant="59" id="zRK-hx-Sln"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6Xw-Jo-1ih">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="cqE-5t-Fvp">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="j0O-Ft-R0L">
-                                <rect key="frame" x="295" y="377" width="150" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="tzi-mA-cLA"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="one body"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="3eK-xU-1r1"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="6Xw-Jo-1ih"/>
                     <connections>
                         <outlet property="numButton" destination="bHH-SY-aNI" id="b6N-Z8-soF"/>
                         <outlet property="scaleButton" destination="m2o-aV-LsM" id="E2M-pG-Uwj"/>
