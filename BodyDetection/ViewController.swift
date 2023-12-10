@@ -49,7 +49,7 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         // Asynchronously load the 3D character.３Dキャラクターの非同期での読み込み
         var cancellable: AnyCancellable? = nil
-        cancellable = Entity.loadBodyTrackedAsync(named: "character/robot").sink(
+        cancellable = Entity.loadBodyTrackedAsync(named: "character/originrobot").sink(
             //読み込みエラー
             receiveCompletion: { completion in
                 if case let .failure(error) = completion {
