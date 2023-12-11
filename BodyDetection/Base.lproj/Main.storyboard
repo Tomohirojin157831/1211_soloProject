@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
@@ -147,6 +148,17 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="ARView" customClass="ARView" customModule="RealityKit">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gda-QA-Pcw">
+                                <rect key="frame" x="160" y="450" width="75" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="buttonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tDl-Fa-tYc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -154,11 +166,12 @@
                     <navigationItem key="navigationItem" id="bOQ-nw-i0d"/>
                     <connections>
                         <outlet property="arView" destination="8bC-Xf-vdC" id="hvU-Ek-za3"/>
+                        <outlet property="button" destination="gda-QA-Pcw" id="Ef0-Oi-M3Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1181" y="-164"/>
+            <point key="canvasLocation" x="1179.7101449275362" y="-164.0625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IOE-07-2RY">
@@ -189,17 +202,33 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" id="uXP-Yq-S81"/>
+                    <navigationItem key="navigationItem" id="uXP-Yq-S81">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="2ee-NN-JKv">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="4Cm-1Z-VCg">
+                                <rect key="frame" x="138" y="757" width="138" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <imageReference key="image" image="camera.shutter.button.fill" catalog="system" symbolScale="large"/>
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="screenshot:" destination="r3w-ws-X2o" eventType="touchUpInside" id="HLF-C5-liA"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="arView" destination="JSx-x6-sTj" id="VVh-j1-88v"/>
+                        <outlet property="button" destination="4Cm-1Z-VCg" id="g5f-oI-DUk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rn0-x1-It8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1180" y="502"/>
+            <point key="canvasLocation" x="1179.7101449275362" y="501.5625"/>
         </scene>
     </scenes>
     <resources>
+        <image name="camera.shutter.button.fill" catalog="system" width="128" height="108"/>
         <image name="robot" width="346.5" height="322.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

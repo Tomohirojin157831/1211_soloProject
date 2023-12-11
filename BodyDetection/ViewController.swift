@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-The sample app's main view controller.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ The sample app's main view controller.
+ */
 
 import UIKit
 import RealityKit
@@ -11,20 +11,29 @@ import ARKit
 import Combine
 
 class ViewController: UIViewController, ARSessionDelegate {
-
+    
     @IBOutlet var arView: ARView!
     
+    @IBOutlet weak var button: UIButton!
+    @IBAction func buttonClicked(_ sender: UIButton) {
+        print("ボタン押した")
+        getScreenShot()
+        let alert = UIAlertController(title: "通知", message: "スクリーンショット保存完了", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     var character: BodyTrackedEntity?// The 3D character to display.//人間と同期するキャラクターを定義
     let characterOffset: SIMD3<Float> = [-1.0, 0, 0] // Offset the character by one meter to the left（カメラで捉えている人間との距離）
     let characterAnchor = AnchorEntity()
     
-//    // Storyboardに変えてARViewをセッティング(ここはビデオを見て追加。下とのコンフリクトをどうするか)→今回はいらない
-//    override func viewDidLoad() {
-//            super.viewDidLoad()
-//            arView = ARView(frame: CGRect.zero,cameraMode: .ar,automaticallyConfigureSession: true)
-//            self.view = arView
-
+    //    // Storyboardに変えてARViewをセッティング(ここはビデオを見て追加。下とのコンフリクトをどうするか)→今回はいらない
+    //    override func viewDidLoad() {
+    //            super.viewDidLoad()
+    //            arView = ARView(frame: CGRect.zero,cameraMode: .ar,automaticallyConfigureSession: true)
+    //            self.view = arView
+    
     
     
     //viewDisAppearメソッドは画面表示直後に呼ばれる・・・チップが対応しているかを確認しているだけなので不要
@@ -39,7 +48,7 @@ class ViewController: UIViewController, ARSessionDelegate {
             fatalError("This feature is only supported on devices with an A12 chip")
         }
         
-
+        
         // Run a body tracking configration.ARKitを使用して人物のボディトラッキングの設定を行い、ARセッションで実行。
         //ARBodyTrackingConfigurationは、ARKitが人物の骨格を検出して追跡するための設定を提供します。この設定をARセッションに適用することで、AR空間内でカメラが捉えた映像から人物の骨格をトラッキングし、リアルタイムでその動きを把握することができます。
         let configuration = ARBodyTrackingConfiguration()
@@ -57,19 +66,19 @@ class ViewController: UIViewController, ARSessionDelegate {
                 }
                 cancellable?.cancel()
                 //読み込み成功時
-        }, receiveValue: { (character: Entity) in
-            if let character = character as? BodyTrackedEntity {
-                // Scale the character to human size
-                character.scale = [1.0, 1.0, 1.0]
-                self.character = character
-                cancellable?.cancel()
-            } else {
-                print("Error: Unable to load model as BodyTrackedEntity")
-            }
-        })
+            }, receiveValue: { (character: Entity) in
+                if let character = character as? BodyTrackedEntity {
+                    // Scale the character to human size
+                    character.scale = [1.0, 1.0, 1.0]
+                    self.character = character
+                    cancellable?.cancel()
+                } else {
+                    print("Error: Unable to load model as BodyTrackedEntity")
+                }
+            })
     }
-        
-        
+    
+    
     
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         for anchor in anchors {
@@ -81,7 +90,7 @@ class ViewController: UIViewController, ARSessionDelegate {
             // Also copy over the rotation of the body anchor, because the skeleton's pose
             // in the world is relative to the body anchor's rotation.
             characterAnchor.orientation = Transform(matrix: bodyAnchor.transform).rotation
-   
+            
             if let character = character, character.parent == nil {
                 // Attach the character to its anchor as soon as
                 // 1. the body anchor was detected and
@@ -90,4 +99,14 @@ class ViewController: UIViewController, ARSessionDelegate {
             }
         }
     }
-}
+    func getScreenShot(){
+        arView.snapshot(saveToHDR: false){image in
+            guard let snapshotImage = image else{
+                print("スクショエラー")
+                return
+            }
+            //スクショを保存する
+            UIImageWriteToSavedPhotosAlbum(snapshotImage, nil,nil,nil)
+            print("スクショ保存成功")
+        }
+    }}

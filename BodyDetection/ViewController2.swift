@@ -17,6 +17,27 @@ class ViewController2: UIViewController, ARSessionDelegate {
     
     @IBOutlet var arView: ARView!
     
+    @IBOutlet weak var button: UIButton!
+    
+    @IBAction func screenshot(_ sender: UIButton) {
+        print("ボタン押した")
+        getScreenShot()
+        let alert = UIAlertController(title: "通知", message: "スクリーンショット保存完了", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func getScreenShot(){
+        arView.snapshot(saveToHDR: false){image in
+            guard let snapshotImage = image else{
+                print("スクショエラー")
+                return
+            }
+            //スクショを保存する
+            UIImageWriteToSavedPhotosAlbum(snapshotImage, nil,nil,nil)
+            print("スクショ保存成功")
+        }
+    }
     
     var character: BodyTrackedEntity?// The 3D character to display.//人間と同期するキャラクターを定義
     var character2: BodyTrackedEntity?// The 3D character to display.//人間と同期するキャラクターを定義
